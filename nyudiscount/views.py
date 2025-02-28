@@ -1,5 +1,6 @@
 from django.http import HttpResponse
 from django.shortcuts import render
 
-def home(request):
-    return render(request, 'nyudiscount/home.html')
+# Create your views here.
+def home_view(*args, **kwargs): # args, kwargs
+    return HttpResponse("<h1>Hello World</h1>") # string of HTML code
