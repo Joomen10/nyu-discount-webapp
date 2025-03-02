@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'map',
     'restaurant',
+    'rest_framework'
 ]
 
 MIDDLEWARE = [

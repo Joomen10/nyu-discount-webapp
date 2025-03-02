@@ -24,4 +24,6 @@ urlpatterns = [
     path('', views.home_view, name='home'),
     path("map/", include("map.urls")),
     path("restaurant/", include("restaurant.urls")),
+    path('api/', include('restaurant.urls'))
 ]
+
