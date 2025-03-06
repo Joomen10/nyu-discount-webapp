@@ -12,3 +12,5 @@ router.register(r'reviews', ReviewsViewSet)
 urlpatterns = [
     path('', include(router.urls)),
 ]
+
+# TEst route
