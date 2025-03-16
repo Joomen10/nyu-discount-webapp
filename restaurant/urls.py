@@ -11,6 +11,7 @@ from django.contrib.auth import views as auth_views
 from . import views
 
 app_name = "login"
+
 urlpatterns = [
     # /restaurant/login/으로 접속하면 페이지 보임
     path(
