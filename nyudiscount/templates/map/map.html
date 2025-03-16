@@ -1,0 +1,25 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <title>NYU 주변 레스토랑 지도</title>
+  <style>
+    #map {
+      height: 600px;
+      width: 100%;
+    }
+  </style>
+  <!-- map.js를 먼저 로드 -->
+  <script src="{% static 'js/map.js' %}" defer></script>
+  <!-- 그 다음 Google Maps JS (콜백: initMap) -->
+  <script
+    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCGyCxqGwUDZACVf-GrppfQlpgbEHv9oIo&callback=initMap"
+    async defer
+  ></script>
+</head>
+<body>
+  <h1>NYU 주변 레스토랑 지도</h1>
+  <div id="map"></div>
+</body>
+</html>
