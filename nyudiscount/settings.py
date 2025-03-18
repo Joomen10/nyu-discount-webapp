@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     "map",
     "restaurant",
     "rest_framework",
+    "users",
 ]
 
 MIDDLEWARE = [
