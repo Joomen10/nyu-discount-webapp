@@ -93,45 +93,78 @@
             background-color: #7e3fa2;
         }
 
-        .error {
-            color: red;
-        }
-
         #response-message {
             margin-top: 15px;
             font-size: 14px;
             color: #28a745;
         }
+
+        .error {
+            color: red;
+        }
     </style>
 </head>
 <body>
-
     <div class="container">
         <h2>Login</h2>
-
-        {% if form.errors %}
-            <p class="error">Incorrect Username or Password.</p>
-        {% endif %}
-
-        <form method="post">
-            {% csrf_token %}
+        <form id="login-form">
             <div class="form-group">
-                <label for="id_username">Username:</label>
-                <input type="text" name="username" id="id_username" autofocus="autofocus">
+                <label for="email">NYU Email:</label>
+                <div class="email-group">
+                    <input type="text" id="email-prefix" name="email-prefix" required placeholder="Enter your NetID">
+                    <span>@nyu.edu</span>
+                </div>
+                <small class="error" id="email-error" style="display: none;">Email is required</small>
             </div>
-
             <div class="form-group">
-                <label for="id_password">Password:</label>
-                <input type="password" name="password" id="id_password">
+                <label for="password">Password:</label>
+                <input type="password" id="password" name="password" required>
             </div>
-
             <button type="submit">Login</button>
         </form>
-
-        <p>Don't have an account? 
-            <a href="{% url 'restaurant_app:register' %}">Sign up here</a>
-        </p>
+        <p id="response-message"></p>
     </div>
 
+    <script>
+        document.getElementById("login-form").addEventListener("submit", function(event) {
+            event.preventDefault(); 
+
+            let emailPrefix = document.getElementById("email-prefix").value.trim();
+            let emailError = document.getElementById("email-error");
+
+            if (emailPrefix === "") {
+                emailError.style.display = "block";
+                return;
+            } else {
+                emailError.style.display = "none";
+            }
+
+            let fullEmail = emailPrefix + "@nyu.edu";
+
+            let formData = {
+                email: fullEmail,
+                password: document.getElementById("password").value
+            };
+
+            fetch("http://127.0.0.1:8000/api/login/", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify(formData)
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.token) {
+                    localStorage.setItem("authToken", data.token);
+                    document.getElementById("response-message").innerText = "Login successful!";
+                    setTimeout(() => window.location.href = "/restaurant/logout/", 2000);
+                } else {
+                    document.getElementById("response-message").innerText = "Invalid credentials.";
+                }
+            })
+            .catch(error => {
+                document.getElementById("response-message").innerText = "Error: " + error;
+            });
+        });
+    </script>
 </body>
 </html>
