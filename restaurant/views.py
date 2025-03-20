@@ -13,18 +13,21 @@ from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth import login
 from django.utils.translation import override
 
+def home_view(request):
+    return render(request, 'restaurant/home.html')
 
-def register_view(request):
-    with override("en"):  # 영어
-        if request.method == "POST":
-            form = UserCreationForm(request.POST)
-            if form.is_valid():
-                user = form.save()
-                login(request, user)
-                return redirect("login:login")  # 회원가입 후 이동할 URL
-        else:
-            form = UserCreationForm()
-        return render(request, "restaurant/dj_register.html", {"form": form})
+# 준혁: 현우가 만든 register_view 인데 users app으로 옮김
+# def register_view(request):
+#     with override("en"):  # 영어
+#         if request.method == "POST":
+#             form = UserCreationForm(request.POST)
+#             if form.is_valid():
+#                 user = form.save()
+#                 login(request, user)
+#                 return redirect("login:login")  # 회원가입 후 이동할 URL
+#         else:
+#             form = UserCreationForm()
+#         return render(request, "restaurant/dj_register.html", {"form": form})
 
 
 class UsersViewSet(viewsets.ModelViewSet):
