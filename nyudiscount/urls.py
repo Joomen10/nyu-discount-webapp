@@ -16,13 +16,23 @@ Including another URLconf
 """
 
 from django.contrib import admin
-from django.urls import path, include
+from django.urls import path, include, reverse
 from . import views
+from django.shortcuts import redirect
+
+
+# 홈페이지로 들어가면 바로 로그인 페이지로 이동시키는 코딩
+def redirect_to_login(request):
+    return redirect("users:login")
 
 urlpatterns = [
     path("admin/", admin.site.urls),
-    path('', views.home_view, name='home'),
+    # 아래것도 홈페이지로 들어가면 바로 로그인 페이지로 갈수 있게 해주는 코딩
+    path("", redirect_to_login, name="home"),
+    # 아래거 일단 삭제는 안함
+    # path("", views.home_view, name="home"),
     path("map/", include("map.urls")),
+    path('users/', include('users.urls')),
     path("restaurant/", include("restaurant.urls")),
     path('api/', include('restaurant.urls')),
 ] 
