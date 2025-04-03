@@ -1,4 +1,6 @@
+
 async function initMap() {
+
   // 지도 생성 (NYU 좌표)
   const nyuCoords = { lat: 40.7291, lng: -73.9965 };
   const map = new google.maps.Map(document.getElementById("map"), {
