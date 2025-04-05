@@ -11,22 +11,26 @@ https://docs.djangoproject.com/en/5.1/ref/settings/
 """
 import os
 from pathlib import Path
+from dotenv import load_dotenv
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
-
+load_dotenv(BASE_DIR / ".env")
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/5.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = "django-insecure-f7c#-z-5r5d%beazx+(f4sgrxx_niw@c)fauxwmliiycbn)7+c"
+SECRET_KEY = os.getenv("SECRET_KEY", "fallback-secret-key")
+# settings.py
+GOOGLE_MAPS_API_KEY = os.getenv("GOOGLE_MAPS_API_KEY", "")
+SIGNUP_API_URL = os.getenv("SIGNUP_API_URL", "http://127.0.0.1:8000/api/signup/")
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = os.getenv("DEBUG", "True") == "True"
 
-ALLOWED_HOSTS = []
-
+ALLOWED_HOSTS = ["*"] if not DEBUG else []
+#DEBUG = True 상태라면 ALLOWED_HOSTS = []로 설정됨
 
 # Application definition
 
@@ -80,11 +84,11 @@ WSGI_APPLICATION = "nyudiscount.wsgi.application"
 DATABASES = {
     "default": {
         "ENGINE": "django.db.backends.mysql",
-        "NAME": "nyu-discount-webapp",
-        "USER": "root",
-        "PASSWORD": "nyu-discount-webapp-password",
-        "HOST": "10.66.66.100",  # 여기를 새 ZeroTier IP로 업데이트
-        "PORT": "3306",
+        "NAME": os.getenv("DB_NAME"),
+        "USER": os.getenv("DB_USER"),
+        "PASSWORD": os.getenv("DB_PASSWORD"),
+        "HOST": os.getenv("DB_HOST"),
+        "PORT": os.getenv("DB_PORT"),
     }
 }
 
