@@ -34,5 +34,6 @@ urlpatterns = [
     path("map/", include("map.urls")),
     path('users/', include('users.urls')),
     path("restaurant/", include("restaurant.urls")),
-    path("api/", include("restaurant.urls")),
-]
+    path('api/', include('restaurant.urls')),
+] 
+
