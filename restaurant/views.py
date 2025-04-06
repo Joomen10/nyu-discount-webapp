@@ -13,22 +13,27 @@ from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth import login
 from django.utils.translation import override
 
+ # 식당 리스트 예시. 실제 레스토랑을 map에서 import 해야됨.
+restaurantList = [
+    {'name': 'Pizza Place', 'location': 'Downtown'},
+    {'name': 'Sushi Spot', 'location': 'Uptown'},
+    {'name': 'Burger Joint', 'location': 'Suburbs'},
+    {'name': 'Taco Truck', 'location': 'East Side'},
+    {'name': 'Pasta Corner', 'location': 'West Side'},
+    {'name': 'Pizza Place', 'location': 'Downtown'},
+    {'name': 'Sushi Spot', 'location': 'Uptown'},
+    {'name': 'Burger Joint', 'location': 'Suburbs'},
+    {'name': 'Taco Truck', 'location': 'East Side'},
+    {'name': 'Pasta Corner', 'location': 'West Side'},
+    {'name': 'Pizza Place', 'location': 'Downtown'},
+    {'name': 'Sushi Spot', 'location': 'Uptown'},
+    {'name': 'Burger Joint', 'location': 'Suburbs'},
+    {'name': 'Taco Truck', 'location': 'East Side'},
+    {'name': 'Pasta Corner', 'location': 'West Side'},
+]
+
 def home_view(request):
-    return render(request, 'restaurant/home.html')
-
-# 준혁: 현우가 만든 register_view 인데 users app으로 옮김
-# def register_view(request):
-#     with override("en"):  # 영어
-#         if request.method == "POST":
-#             form = UserCreationForm(request.POST)
-#             if form.is_valid():
-#                 user = form.save()
-#                 login(request, user)
-#                 return redirect("login:login")  # 회원가입 후 이동할 URL
-#         else:
-#             form = UserCreationForm()
-#         return render(request, "restaurant/dj_register.html", {"form": form})
-
+    return render(request, 'restaurant/home.html', {'restaurantList': restaurantList})
 
 class UsersViewSet(viewsets.ModelViewSet):
     queryset = Users.objects.all()
