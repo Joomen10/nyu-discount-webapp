@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+  <head>
+    <meta charset="UTF-8">
+    <title>SIGN UP PAGE</title>
+  </head>
+
+  <body>
+    <h2>SIGN UP</h2>
+    <form method="post">
+      {% csrf_token %}
+      {{ form.as_p }}
+      <button type="submit">Create an account</button>
+    </form>
+    <p>Already have an account?
+      <a href="{% url 'users:login' %}">Login</a>
+    </p>
+  </body>
+
+</html>
