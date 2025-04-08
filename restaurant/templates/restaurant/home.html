@@ -1,6 +1,8 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <link rel="stylesheet" href="{% static 'restaurant/styles.css' %}">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Restaurant</title>
@@ -13,6 +15,26 @@
                 title="User Logout">LogOut</button>
         </form>
     </nav>
+    
     <h1>Restaurant Homepage</h1>
+    
+    <div class="scrollable-table-container">
+        <table class="scrollable-table">
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Location</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for restaurant in restaurantList %}
+                    <tr>
+                        <td>{{ restaurant.name }}</td>
+                        <td>{{ restaurant.location }}</td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
 </body>
 </html>

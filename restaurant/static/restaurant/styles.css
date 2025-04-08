@@ -1,0 +1,32 @@
+.scrollable-table-container {
+    width: 60%;
+    margin: 40px auto; /* centers the container */
+    max-height: 300px;
+    overflow-y: auto;
+    border: 2px solid #ccc;
+    background-color: #fafafa;
+    padding: 10px;
+    box-sizing: border-box;
+    border-radius: 8px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.scrollable-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.scrollable-table th,
+.scrollable-table td {
+    padding: 10px;
+    border-bottom: 1px solid #ddd;
+    text-align: left;
+    background-color: #fff;
+}
+
+.scrollable-table th {
+    position: sticky;
+    top: 0;
+    background-color: #f2f2f2;
+    z-index: 1;
+}
