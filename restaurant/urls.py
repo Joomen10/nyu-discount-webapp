@@ -10,7 +10,9 @@ from .views import (
     LogoutView,  # Your API view
     register_view,
 )
-from django.contrib.auth import views as auth_views  # Django built-in views
+from django.contrib.auth import views as auth_views
+from django.contrib.auth.views import LogoutView
+from . import views
 
 router = DefaultRouter()
 router.register(r"users", UsersViewSet)
@@ -46,3 +48,4 @@ urlpatterns = [
     # DRF router URLs
     path("api/", include(router.urls)),
 ]
+urlpatterns += router.urls

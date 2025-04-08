@@ -93,8 +93,7 @@ class LogoutView(APIView):
     def post(self, request):
         request.user.auth_token.delete()  # ✅ Deletes the token
         return Response({"message": "Logged out successfully!"}, status=status.HTTP_200_OK)
-
-
+      
 def home_view(request):
     return render(request, 'restaurant/home.html', {'restaurantList': restaurantList})
 
