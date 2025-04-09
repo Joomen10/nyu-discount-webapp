@@ -1,6 +1,8 @@
-from django.http import HttpResponse
 from django.shortcuts import render
+from django.conf import settings
 
-# Create your views here.
-def home_view(*args, **kwargs): # args, kwargs
-    return HttpResponse("<h1>Hello World</h1>") # string of HTML code
+def signup_view(request):
+    context = {
+        "signup_api_url": settings.SIGNUP_API_URL  # 환경변수에서 가져옴
+    }
+    return render(request, "map/signup.html", context)

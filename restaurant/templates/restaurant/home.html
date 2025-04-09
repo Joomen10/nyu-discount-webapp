@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Restaurant</title>
+</head>
+<body>
+    <nav>
+        <form class="logout" action="{% url 'users:logout' %}" method="post">
+            {% csrf_token %}
+            <button class="logout-button" aria-label="User Logout"
+                title="User Logout">LogOut</button>
+        </form>
+    </nav>
+    <h1>Restaurant Homepage</h1>
+</body>
+</html>

@@ -156,23 +156,25 @@
 
         <p id="response-message"></p>
     </div>
-
+    <!-- API 주소가 바뀔 때 HTML 코드 자체를 수정하지 않고, 환경 변수만 변경하면 됨-->
     <script>
+        const SIGNUP_API_URL = "{{ signup_api_url }}"; // 변수화된 API URL
+    
         document.getElementById("signup-form").addEventListener("submit", function(event) {
-            event.preventDefault();  // Prevent normal form submission
-
+            event.preventDefault();
+    
             let emailPrefix = document.getElementById("email-prefix").value.trim();
             let emailError = document.getElementById("email-error");
-
+    
             if (emailPrefix === "") {
                 emailError.style.display = "block";
                 return;
             } else {
                 emailError.style.display = "none";
             }
-
+    
             let fullEmail = emailPrefix + "@nyu.edu";
-
+    
             let formData = {
                 name: document.getElementById("name").value,
                 email: fullEmail,
@@ -180,8 +182,8 @@
                 school: document.getElementById("school").value,
                 grade: document.getElementById("grade").value
             };
-
-            fetch("http://127.0.0.1:8000/api/signup/", {
+    
+            fetch(SIGNUP_API_URL, {  // 변수를 사용
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json"
@@ -196,7 +198,7 @@
                 document.getElementById("response-message").innerText = "Error: " + error;
             });
         });
-    </script>
+    </script>    
 
 </body>
 </html>
