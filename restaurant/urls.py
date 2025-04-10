@@ -22,32 +22,6 @@ app_name = 'restaurant'
 
 urlpatterns = [
     path("", views.home_view, name='home'),
-
-    # 준혁: login, register features들 전부 users app으로 옮겨서 현우가 add한 path들 전부 코멘트 처리했습니다.
-    # path(
-    #     "login/",
-    #     auth_views.LoginView.as_view(template_name="restaurant/dj_login.html"),
-    #     name="login",
-    # ),
-    # path(
-    #     "logout/",
-    #     auth_views.LogoutView.as_view(next_page="/restaurant/login/"),
-    #     name="logout",
-    # ),
-    # path("register/", views.register_view, name="register"),
-
-    # path("", include(router.urls)),
-
-    # /restaurant/login/으로 접속하면 페이지 보함
-    # path(
-    #     "",
-    #     auth_views.LoginView.as_view(template_name="restaurant/dj_login.html"),
-    #     name="login",
-    # ),
-    # # 로그아웃 후에 다시 로그인 페이지로 이동하게끔 하는 코딩 근데 로그아웃 기능은 아직 추가 못함
-    # path(
-    #     "logout/", auth_views.LogoutView.as_view(next_page="login:login"), name="logout"
-    # ),
 ]
 
 """ 초반에 일반적인 login 페이지 만드느 방식으로 했는데 자꾸 안되길래 알아봤더니 router? 이거 때문에 "내부에서는 Django Rest Framework(DRF)의 Router 기반 URL 패턴만 노출되고 있습니다. 

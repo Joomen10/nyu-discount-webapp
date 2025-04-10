@@ -1,10 +1,13 @@
 from django.shortcuts import render
 from django.http import JsonResponse
+from django.conf import settings  # nyudiscount의 settings에서 가져옴
 from restaurant.models import Restaurants
 
 def map_view(request):
-    return render(request, "map/map.html")
-
+    context = {
+        "google_maps_api_key": settings.GOOGLE_MAPS_API_KEY
+    }
+    return render(request, "map/map.html", context)
 
 def restaurant_list(request):
     qs = Restaurants.objects.all()

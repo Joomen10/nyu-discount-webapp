@@ -33,7 +33,8 @@ urlpatterns = [
     # path("", views.home_view, name="home"),
     path("map/", include("map.urls")),
     path('users/', include('users.urls')),
-    path("restaurant/", include("restaurant.urls")),
-    path('api/', include('restaurant.urls')),
+    path("restaurant/", include(("restaurant.urls", "restaurant"))),
+    path('api/', include(("restaurant.urls", "restaurant_api"))), # namespace다르게 해서 충돌 완화함
+
 ] 
 
