@@ -15,6 +15,9 @@ from pathlib import Path
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
+# Quick-start development settings - unsuitable for production
+# See https://docs.djangoproject.com/en/5.1/howto/deployment/checklist/
+
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = "django-insecure-f7c#-z-5r5d%beazx+(f4sgrxx_niw@c)fauxwmliiycbn)7+c"
 
@@ -23,7 +26,9 @@ DEBUG = True
 
 ALLOWED_HOSTS = []
 
+
 # Application definition
+
 INSTALLED_APPS = [
     "django.contrib.admin",
     "django.contrib.auth",
@@ -36,6 +41,8 @@ INSTALLED_APPS = [
     "rest_framework",
     "users",
 ]
+
+# Use your custom user model instead of the default auth.User.
 
 MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware",
@@ -52,7 +59,7 @@ ROOT_URLCONF = "nyudiscount.urls"
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [BASE_DIR / 'nyudiscount' / "templates", BASE_DIR / "restaurant" / "templates"], 
+        'DIRS': [BASE_DIR / 'nyudiscount' / 'templates'],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -67,21 +74,25 @@ TEMPLATES = [
 
 WSGI_APPLICATION = "nyudiscount.wsgi.application"
 
+
 # Database
 # https://docs.djangoproject.com/en/5.1/ref/settings/#databases
+
 DATABASES = {
     "default": {
         "ENGINE": "django.db.backends.mysql",
         "NAME": "nyu-discount-webapp",
         "USER": "root",
         "PASSWORD": "nyu-discount-webapp-password",
-        "HOST": "10.66.66.100",  # Update to your current host if needed.
+        "HOST": "10.66.66.100",  # 여기를 새 ZeroTier IP로 업데이트
         "PORT": "3306",
     }
 }
 
+
 # Password validation
 # https://docs.djangoproject.com/en/5.1/ref/settings/#auth-password-validators
+
 AUTH_PASSWORD_VALIDATORS = [
     {
         "NAME": "django.contrib.auth.password_validation.UserAttributeSimilarityValidator",
@@ -97,13 +108,9 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
-# Use Argon2 for password hashing – install argon2-cffi via pip if you haven't already.
-PASSWORD_HASHERS = [
-    'django.contrib.auth.hashers.Argon2PasswordHasher',  # Preferred secure hasher
-    'django.contrib.auth.hashers.PBKDF2PasswordHasher',
-    'django.contrib.auth.hashers.PBKDF2SHA1PasswordHasher',
-    'django.contrib.auth.hashers.BCryptSHA256PasswordHasher',
-]
+
+# Internationalization
+# https://docs.djangoproject.com/en/5.1/topics/i18n/
 
 LANGUAGE_CODE = "ko-kr"
 
@@ -113,16 +120,17 @@ USE_I18N = True
 
 USE_TZ = True
 
+
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/5.1/howto/static-files/
+
 STATIC_URL = "/static/"
-
-LOGIN_REDIRECT_URL = "/restaurant/"
-
-STATICFILES_DIRS = [
-    BASE_DIR / "static",
-]
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.1/ref/settings/#default-auto-field
+
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+LOGIN_REDIRECT_URL = "/restaurant/"
+STATICFILES_DIRS = [
+    BASE_DIR / "static",  # 프로젝트 루트에 static 디렉토리를 둘 경우
+]

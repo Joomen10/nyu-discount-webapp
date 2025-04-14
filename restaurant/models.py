@@ -1,13 +1,13 @@
 from django.db import models
 
+
 class Users(models.Model):
     user_id = models.BigAutoField(primary_key=True)
     name = models.CharField(max_length=255)
     email = models.CharField(max_length=255, unique=True)
-    # Removed the default so a password must be provided (and hashed) when creating a user.
     password = models.CharField(max_length=255)
-    school = models.CharField(max_length=255, default="NYU")
-    grade = models.CharField(max_length=20, default="Freshman")
+    school = models.CharField(max_length=255)  # ✅ Added
+    grade = models.CharField(max_length=20)  # ✅ Added
 
     def __str__(self):
         return self.name
@@ -17,12 +17,11 @@ class Discounts(models.Model):
     discount_id = models.BigAutoField(primary_key=True)
     discount_type = models.CharField(max_length=255)
     discount_value = models.DecimalField(max_digits=10, decimal_places=2)
-    # Uncomment and add valid_from/valid_until if needed:
     # valid_from = models.DateTimeField()
     # valid_until = models.DateTimeField()
 
     def __str__(self):
-        return self.discount_type
+        return self.code
 
 
 class Restaurants(models.Model):
@@ -50,8 +49,7 @@ class Menus(models.Model):
     category = models.CharField(max_length=255, blank=True, null=True)
 
     def __str__(self):
-        # Note: Using restaurant_id's related Restaurants object's name.
-        return f"{self.name} - {self.restaurant_id.name}"
+        return f"{self.name} - {self.restaurant.name}"
 
 
 class Reviews(models.Model):
@@ -63,4 +61,4 @@ class Reviews(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
-        return f"Review by {self.user_id.name} for {self.restaurant_id.name}"
+        return f"Review by {self.user.name} for {self.restaurant.name}"
