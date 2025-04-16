@@ -1,14 +1,14 @@
 .scrollable-table-container {
     width: 60%;
     margin: 40px auto; /* centers the container */
-    max-height: 300px;
+    max-height: 500px;
     overflow-y: auto;
-    border: 2px solid #ccc;
+    border: 2px solid #a250ff;
     background-color: #fafafa;
     padding: 10px;
     box-sizing: border-box;
     border-radius: 8px;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 4px 10px a250ff;
 }
 
 .scrollable-table {
@@ -19,7 +19,7 @@
 .scrollable-table th,
 .scrollable-table td {
     padding: 10px;
-    border-bottom: 1px solid #ddd;
+    border-bottom: 1px solid #dddddd;
     text-align: left;
     background-color: #fff;
 }
@@ -27,6 +27,7 @@
 .scrollable-table th {
     position: sticky;
     top: 0;
-    background-color: #f2f2f2;
+    background-color: #a250ff; /* changed table head color purple */
+    color: #fff; /* changed text color white */
     z-index: 1;
 }
