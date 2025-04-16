@@ -13,7 +13,7 @@ async function initMap() {
 
   let pin = new PinElement({
     scale: 1.25,
-    background: "#F7D32F",
+    background: "#57068C",
     glyph: "",
 
   });
@@ -27,31 +27,9 @@ async function initMap() {
     }
 
     const data = await response.json();
-    // console.log("API Response Data:", data);
 
     data.forEach((rest) => {
-      // console.log("Position data:", rest["longitude"], rest["latitude"], typeof rest["longitude"], typeof rest["latitude"]);
-      
-      // const { Place } = google.maps.importLibrary('places');
-
-      // // Use a place ID to create a new Place instance.
-      // const place = new Place({
-      //     id: rest.restaurant_id, // Woodland Park Zoo, Seattle WA
-      // });
-
-      // // Call fetchFields, passing the desired data fields.
-      // place.fetchFields({ fields: ['photos'] });
-
-      // // Add the first photo to an img element.
-      // const photoImg = document.getElementById('image-container');
-      // photoImg.src = place.photos[0].getURI({maxHeight: 400});
-      // console.log("\n WAHHH: ", rest.name, "\n WEEE: ", photoImg.src);
-
-      //---------------------------------------
-
-
       if (rest["longitude"] && rest["latitude"]) {
-        // console.log("Creating marker for:", rest.name);
         const lat = parseFloat(rest["latitude"]);
         const lng = parseFloat(rest["longitude"]);
 
@@ -62,8 +40,6 @@ async function initMap() {
           content: pin.element,
           gmpClickable: true,
         });
-
-        // console.log("marker", marker);
 
         const infowindow = new google.maps.InfoWindow({
           content: `
@@ -91,14 +67,6 @@ async function initMap() {
     console.error("Error fetching restaurants:", err);
   }
 }
-  // Call fetchFields, passing the desired data fields.
-  // await place.fetchFields({
-  //   fields: ["photos"],
-  // });
-  // // Log the result
-  // console.log("place.displayName: ", place.displayName);
-  // console.log("place.location: ", place.location);
-  // console.log("place.photos: ", place.photos);
 
 // Google Maps 콜백에서 이 함수를 찾을 수 있도록 전역에 등록
 window.initMap = initMap;

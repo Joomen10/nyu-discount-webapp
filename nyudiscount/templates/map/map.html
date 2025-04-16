@@ -4,7 +4,9 @@
 <head>
   <meta charset="UTF-8">
   <title>NYU 주변 레스토랑 지도</title>
-  <a href="{% url '' %}">Go to List</a>
+  <a href="{% url 'restaurant:home' %}">
+    <button type="button">Go to Restaurant List</button>
+  </a>
   <style>
     #map {
       height: 600px;
