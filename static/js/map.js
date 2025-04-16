@@ -53,8 +53,6 @@ async function initMap() {
             <p>Open Hours: ${rest.open_hours || "Not Available"}</p>
             <p>Google Place ID: ${rest.google_place_id}</p>
             <p>Discount ID: ${rest.discounts_id || "Not Available"}</p>
-            <img src="https://maps.googleapis.com/maps/api/place/photo?maxwidth=400&photoreference=AeeoHcJdeC-ZWHB9qJDTVWr3-CPQ_Sq_sKCYXZ7dVNgLAJ36HFbA3bzaZZEAA25CXHszgGL_fPPXvpC2xVUlZV7k6GxdSUNg1XCG47qr2mfsJysFhsbvNCTPJxi8M9ud1WbuD-qkaSCg4m2h4wq35wMcQYpnWA4UWwtswDN_qc138WQU69R9GS7wQQDFQNmVSAdjdF-whGN97wImEbI61a6z9-n5wEIPImUmlHpACBtkr5mdu8qSmr31OeR77JCPaj8FdRCWMa81lGjNxKkRloqMJEimf-uvgLU7fo3wXLzRqN1tu0j2N8vjpW3uYO9D3L78qf1DH2nJB3I6SLU_JI0suNlePLOPsyx0sw-gv0CrXzfsrrATdyDQ3XZ8kZgNqibLdpbZGN1Yq2UIoQ8DsZPwjbHuB3rcZrc5eVjzB5UdQmhB0wcV&key=AIzaSyCGyCxqGwUDZACVf-GrppfQlpgbEHv9oIo
-" alt="dummy img" width="400" height="400">
             `,
         });
 
