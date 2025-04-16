@@ -63,19 +63,9 @@ class Command(BaseCommand):
 
         places = data.get("places", [])
         restaurants_count = 0
-        photo_width = 400
-        photo_height = 400
 
-        for i in places[0]['photos']:
-            print(i)
-
-        # image_urls = [photo['photoUri'] for photo in places[0]['photos']]
-        # print(image_urls)
         for place in places:
             google_place_id = place.get("id")
-            # print("\n WEEEE: ", google_place_id)
-            google_place_photos = place.get("photos")
-            # print("\n WAHHHH: ", place)
             displayName = place.get("displayName")
             if isinstance(displayName, dict):
                 name = displayName.get("text")
