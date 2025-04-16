@@ -2,6 +2,7 @@ import time
 import requests
 from django.core.management.base import BaseCommand
 from restaurant.models import Restaurants
+import pprint
 
 class Command(BaseCommand):
     help = "Import restaurants from Google Places API (NYU 중심 반경 15km 내 레스토랑 데이터 구축) using (New) Places API"
@@ -34,7 +35,7 @@ class Command(BaseCommand):
             "Content-Type": "application/json; charset=utf-8",
             "X-Goog-Api-Key": API_KEY,
             # 반환받을 필드를 지정 (필요에 따라 수정)
-            "X-Goog-FieldMask": "places(id,displayName,formattedAddress,location,rating,types)"
+            "X-Goog-FieldMask": "places(id,displayName,formattedAddress,location,rating,types,photos)"
         }
         NYU_LAT, NYU_LNG = 40.7291, -73.9965
         body = {
@@ -62,8 +63,19 @@ class Command(BaseCommand):
 
         places = data.get("places", [])
         restaurants_count = 0
+        photo_width = 400
+        photo_height = 400
+
+        for i in places[0]['photos']:
+            print(i)
+
+        # image_urls = [photo['photoUri'] for photo in places[0]['photos']]
+        # print(image_urls)
         for place in places:
             google_place_id = place.get("id")
+            # print("\n WEEEE: ", google_place_id)
+            google_place_photos = place.get("photos")
+            # print("\n WAHHHH: ", place)
             displayName = place.get("displayName")
             if isinstance(displayName, dict):
                 name = displayName.get("text")
