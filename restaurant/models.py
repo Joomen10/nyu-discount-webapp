@@ -65,6 +65,7 @@ class Menus(models.Model):
 class Reviews(models.Model):
     review_id = models.BigAutoField(primary_key=True)
     user_id = models.ForeignKey(Users, on_delete=models.CASCADE, related_name="reviews")
+
     restaurant_id = models.ForeignKey(
         Restaurants, on_delete=models.CASCADE, related_name="reviews"
     )

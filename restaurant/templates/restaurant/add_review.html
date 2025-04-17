@@ -1,0 +1,11 @@
+{% extends 'base.html' %}
+{% block content %}
+  <h2>{{ restaurant.name }}
+    리뷰 작성</h2>
+  <form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">저장하기</button>
+    <a href="{% url 'restaurant:home' %}">취소</a>
+  </form>
+{% endblock %}
