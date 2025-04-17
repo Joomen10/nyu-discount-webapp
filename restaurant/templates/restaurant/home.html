@@ -3,14 +3,28 @@
 <html lang="en">
 
   <head>
-    <link rel="stylesheet" href="{% static 'restaurant/styles.css' %}">
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Restaurant</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Restaurant Homepage</title>
+    <link rel="stylesheet" href="{% static 'restaurant/styles.css' %}">
   </head>
 
   <body>
-    <!-- 네비게이션 등 생략 -->
+    <!-- 네비게이션 바 -->
+    <nav>
+      <!-- 로그아웃 -->
+      <form class="logout" action="{% url 'users:logout' %}" method="post" style="display:inline;">
+        {% csrf_token %}
+        <button class="logout-button" aria-label="User Logout" title="User Logout">
+          LogOut
+        </button>
+      </form>
+
+      <!-- 지도 페이지로 이동 -->
+      <a href="{% url 'map' %}" style="margin-left:1em;">
+        <button type="button">Go to Map</button>
+      </a>
+    </nav>
 
     <h1>Restaurant Homepage</h1>
 
