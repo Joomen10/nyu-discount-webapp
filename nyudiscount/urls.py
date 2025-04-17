@@ -23,8 +23,7 @@ from django.shortcuts import redirect
 
 # 홈페이지로 들어가면 바로 로그인 페이지로 이동시키는 코딩
 def redirect_to_login(request):
-    return redirect("login:login")
-
+    return redirect("users:login")
 
 urlpatterns = [
     path("admin/", admin.site.urls),
@@ -33,6 +32,8 @@ urlpatterns = [
     # 아래거 일단 삭제는 안함
     # path("", views.home_view, name="home"),
     path("map/", include("map.urls")),
+    path('users/', include('users.urls')),
     path("restaurant/", include("restaurant.urls")),
-    path("api/", include("restaurant.urls")),
-]
+    path('api/', include('restaurant.urls')),
+] 
+

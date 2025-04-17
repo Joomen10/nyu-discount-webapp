@@ -12,20 +12,21 @@ from .serializers import (
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth import login
 from django.utils.translation import override
+# importing needed restaurant model
+from restaurant.models import Restaurants
 
+# Changed home_view so that it brings real data from Restaurants model
+def home_view(request):
+    qs = Restaurants.objects.all()
+    data = [
+        {
+            "name": r.name,
+            "address": r.address,
+            "rating": float(r.rating) if r.rating else None,
+        } for r in qs
+    ]
 
-def register_view(request):
-    with override("en"):  # 영어
-        if request.method == "POST":
-            form = UserCreationForm(request.POST)
-            if form.is_valid():
-                user = form.save()
-                login(request, user)
-                return redirect("login:login")  # 회원가입 후 이동할 URL
-        else:
-            form = UserCreationForm()
-        return render(request, "restaurant/dj_register.html", {"form": form})
-
+    return render(request, 'restaurant/home.html', {'restaurantList': data})
 
 class UsersViewSet(viewsets.ModelViewSet):
     queryset = Users.objects.all()
