@@ -17,6 +17,7 @@ from restaurant.models import Restaurants
 
 # Changed home_view so that it brings real data from Restaurants model
 def home_view(request):
+
     qs = Restaurants.objects.all()
     data = [
         {
@@ -27,6 +28,7 @@ def home_view(request):
     ]
 
     return render(request, 'restaurant/home.html', {'restaurantList': data})
+
 
 class UsersViewSet(viewsets.ModelViewSet):
     queryset = Users.objects.all()
