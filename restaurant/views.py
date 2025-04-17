@@ -12,9 +12,21 @@ from .serializers import (
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth import login
 from django.utils.translation import override
+# importing needed restaurant model
+from restaurant.models import Restaurants
 
+# Changed home_view so that it brings real data from Restaurants model
 def home_view(request):
-    return render(request, 'restaurant/home.html')
+    qs = Restaurants.objects.all()
+    data = [
+        {
+            "name": r.name,
+            "address": r.address,
+            "rating": float(r.rating) if r.rating else None,
+        } for r in qs
+    ]
+
+    return render(request, 'restaurant/home.html', {'restaurantList': data})
 
 class UsersViewSet(viewsets.ModelViewSet):
     queryset = Users.objects.all()
