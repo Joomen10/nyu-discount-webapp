@@ -15,7 +15,9 @@ from dotenv import load_dotenv
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
+
 load_dotenv(BASE_DIR / ".env")
+
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/5.1/howto/deployment/checklist/
@@ -46,6 +48,8 @@ INSTALLED_APPS = [
     "rest_framework",
     "users",
 ]
+
+# Use your custom user model instead of the default auth.User.
 
 MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware",
@@ -127,16 +131,13 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/5.1/howto/static-files/
 
-STATIC_URL = "static/"
+STATIC_URL = "/static/"
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.1/ref/settings/#default-auto-field
 
-
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 LOGIN_REDIRECT_URL = "/restaurant/"
 STATICFILES_DIRS = [
-    BASE_DIR / "static", # 프로젝트 루트에 static 디렉토리를 둘 경우
+    BASE_DIR / "static",  # 프로젝트 루트에 static 디렉토리를 둘 경우
 ]
-
-

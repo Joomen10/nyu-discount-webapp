@@ -1,33 +1,109 @@
 <!DOCTYPE html>
-<html lang="ko">
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>NYU Login</title>
+  <style>
+    /* General Styles */
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f4f4f9;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+    }
 
-  <head>
-    <meta charset="UTF-8">
-    <title>LOGIN PAGE</title>
-  </head>
+    .container {
+      background: #ffffff;
+      padding: 30px;
+      border-radius: 8px;
+      box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+      width: 350px;
+      text-align: center;
+    }
 
-  <body>
-    <h2>LOGIN</h2>
+    h2 {
+      color: #57068c; /* NYU Violet */
+      margin-bottom: 20px;
+      font-size: 24px;
+    }
 
+    .form-group {
+      margin-bottom: 15px;
+      text-align: left;
+    }
+
+    label {
+      font-weight: bold;
+      display: block;
+      margin-bottom: 5px;
+      color: #57068c; /* NYU Violet */
+    }
+
+    input {
+      width: 100%;
+      padding: 10px;
+      border: 1px solid #57068c;
+      border-radius: 5px;
+      font-size: 14px;
+    }
+
+    button {
+      width: 100%;
+      padding: 10px;
+      background-color: #57068c; /* NYU Violet */
+      color: white;
+      border: none;
+      border-radius: 5px;
+      font-size: 16px;
+      cursor: pointer;
+      margin-top: 10px;
+      transition: 0.3s;
+    }
+
+    button:hover {
+      background-color: #7e3fa2;
+    }
+
+    #response-message {
+      margin-top: 15px;
+      font-size: 14px;
+      color: #28a745;
+    }
+
+    .error {
+      color: red;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h2>Login</h2>
     {% if form.errors %}
-      <p style="color:red;">Incorrect Username or Password.</p>
+      <p class="error">Incorrect Username or Password.</p>
     {% endif %}
-
     <form method="post">
       {% csrf_token %}
-      <div>
+      <!-- Username Field -->
+      <div class="form-group">
         <label for="id_username">Username:</label>
-        <input type="text" name="username" id="id_username" autofocus="autofocus">
+        <input type="text" id="id_username" name="username" required autofocus>
       </div>
-      <div>
+      <!-- Password Field -->
+      <div class="form-group">
         <label for="id_password">Password:</label>
-        <input type="password" name="password" id="id_password">
+        <input type="password" id="id_password" name="password" required>
       </div>
       <button type="submit">Login</button>
-      <p>Don't have an account?
-        <a href="{% url 'users:register' %}">Sign up here</a>
-      </p>
     </form>
-  </body>
-
+    <p>
+      Don't have an account? 
+      <a href="{% url 'users:register' %}">Sign up here</a>
+    </p>
+    <p id="response-message"></p>
+  </div>
+</body>
 </html>
