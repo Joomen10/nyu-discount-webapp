@@ -14,6 +14,11 @@
             <button class="logout-button" aria-label="User Logout"
                 title="User Logout">LogOut</button>
         </form>
+
+        {% comment %} Added a button that directs to /map website {% endcomment %}
+        <a href="{% url 'map' %}">
+            <button type="button">Go to Map</button>
+        </a>
     </nav>
     
     <h1>Restaurant Homepage</h1>
@@ -24,13 +29,16 @@
                 <tr>
                     <th>Name</th>
                     <th>Location</th>
+                    <th>Rating</th>
                 </tr>
             </thead>
             <tbody>
                 {% for restaurant in restaurantList %}
                     <tr>
                         <td>{{ restaurant.name }}</td>
-                        <td>{{ restaurant.location }}</td>
+                        {% comment %} Added restaurant address and rating from real data {% endcomment %}
+                        <td>{{ restaurant.address }}</td>
+                        <td>{{ restaurant.rating }}</td>
                     </tr>
                 {% endfor %}
             </tbody>
