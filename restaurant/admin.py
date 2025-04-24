@@ -1,4 +1,7 @@
 from django.contrib import admin
+
+# from .models import Restaurants, Menus, Discounts
+
 from .models import Users, Restaurants, Menus, Discounts, Reviews
 
 
@@ -12,7 +15,7 @@ class RestaurantsAdmin(admin.ModelAdmin):
 
 
 admin.site.register(Users)
-admin.site.register(Restaurants)
+# admin.site.register(Restaurants)
 admin.site.register(Menus)
 admin.site.register(Discounts)
 admin.site.register(Reviews)

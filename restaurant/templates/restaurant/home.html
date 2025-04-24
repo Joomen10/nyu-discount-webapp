@@ -38,8 +38,8 @@
               <td>{{ r.name }}</td>
               <td>{{ r.address }}</td>
               <td>
-                {% if r.avg_rating %}
-                  {{ r.avg_rating|floatformat:1 }}/5
+                {% if r.rating %}
+                  {{ r.rating|floatformat:1 }}/5
                 {% else %}
                   No Rating
                 {% endif %}
