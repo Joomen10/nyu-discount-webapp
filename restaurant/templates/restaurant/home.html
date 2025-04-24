@@ -1,27 +1,22 @@
+{# restaurant/templates/restaurant/home.html #}
 {% load static %}
 <!DOCTYPE html>
 <html lang="en">
 
   <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Restaurant Homepage</title>
     <link rel="stylesheet" href="{% static 'restaurant/styles.css' %}">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Restaurant</title>
   </head>
 
   <body>
-    <!-- 네비게이션 바 -->
     <nav>
-      <!-- 로그아웃 -->
-      <form class="logout" action="{% url 'users:logout' %}" method="post" style="display:inline;">
+      <form class="logout" action="{% url 'users:logout' %}" method="post">
         {% csrf_token %}
-        <button class="logout-button" aria-label="User Logout" title="User Logout">
-          LogOut
-        </button>
+        <button class="logout-button" title="Log out">Log Out</button>
       </form>
-
-      <!-- 지도 페이지로 이동 -->
-      <a href="{% url 'map' %}" style="margin-left:1em;">
+      <a href="{% url 'map' %}">
         <button type="button">Go to Map</button>
       </a>
     </nav>
@@ -43,13 +38,11 @@
               <td>{{ r.name }}</td>
               <td>{{ r.address }}</td>
               <td>
-                <a href="{% url 'restaurant:add_review' r.restaurant_id %}">
-                  {% if r.avg_rating %}
-                    {{ r.avg_rating|floatformat:1 }}★ (수정)
-                  {% else %}
-                    Leave a Review
-                  {% endif %}
-                </a>
+                {% if r.avg_rating %}
+                  {{ r.avg_rating|floatformat:1 }}/5
+                {% else %}
+                  No Rating
+                {% endif %}
               </td>
             </tr>
           {% endfor %}
