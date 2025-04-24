@@ -2,22 +2,88 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <link rel="stylesheet" href="{% static 'restaurant/styles.css' %}">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Restaurant</title>
+    <title>NYU Restaurant Hub</title>
+    <link rel="stylesheet" href="{% static 'restaurant/styles.css' %}">
+    <style>
+        body {
+            margin: 0;
+            font-family: 'Inter', sans-serif;
+            background: linear-gradient(135deg, #f8f9fa, #e9ecef);
+            color: #1a1a2e;
+        }
+
+        nav {
+            background-color: #57068c;
+            padding: 1rem 2rem;
+            display: flex;
+            justify-content: flex-end;
+        }
+
+        .logout-button {
+            background-color: #fff;
+            color: #57068c;
+            font-weight: bold;
+            border: none;
+            padding: 0.5rem 1rem;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .logout-button:hover {
+            background-color: #f0e6fa;
+        }
+
+        h1 {
+            text-align: center;
+            color: #57068c;
+            margin-top: 2rem;
+            font-size: 2.5rem;
+        }
+
+        .scrollable-table-container {
+            max-width: 800px;
+            margin: 2rem auto;
+            padding: 1rem;
+            background-color: #ffffff;
+            border-radius: 10px;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.05);
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        th, td {
+            padding: 1rem;
+            border-bottom: 1px solid #ddd;
+            text-align: left;
+        }
+
+        th {
+            background-color: #f0e6fa;
+            color: #57068c;
+            font-size: 1.1rem;
+        }
+
+        tr:hover {
+            background-color: #f8f0ff;
+        }
+    </style>
 </head>
 <body>
     <nav>
         <form class="logout" action="{% url 'users:logout' %}" method="post">
             {% csrf_token %}
-            <button class="logout-button" aria-label="User Logout"
-                title="User Logout">LogOut</button>
+            <button class="logout-button" aria-label="User Logout" title="User Logout">LogOut</button>
         </form>
     </nav>
-    
-    <h1>Restaurant Homepage</h1>
-    
+
+    <h1>NYU Restaurant Discounts</h1>
+
     <div class="scrollable-table-container">
         <table class="scrollable-table">
             <thead>
