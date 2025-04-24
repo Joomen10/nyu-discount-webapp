@@ -1,106 +1,141 @@
 {% load static %}
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>NYU Restaurant Hub</title>
-    <link rel="stylesheet" href="{% static 'restaurant/styles.css' %}">
-    <style>
-        body {
-            margin: 0;
-            font-family: 'Inter', sans-serif;
-            background: linear-gradient(135deg, #f8f9fa, #e9ecef);
-            color: #1a1a2e;
-        }
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>NYU Discount Restaurants</title>
+  <link rel="stylesheet" href="{% static 'restaurant/styles.css' %}" />
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Inter', sans-serif;
+      background: linear-gradient(135deg, #f4f4f9, #e9ecef);
+      color: #2c2c2c;
+    }
 
-        nav {
-            background-color: #57068c;
-            padding: 1rem 2rem;
-            display: flex;
-            justify-content: flex-end;
-        }
+    nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background-color: #57068c;
+      padding: 1rem 2rem;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
 
-        .logout-button {
-            background-color: #fff;
-            color: #57068c;
-            font-weight: bold;
-            border: none;
-            padding: 0.5rem 1rem;
-            border-radius: 6px;
-            cursor: pointer;
-            transition: background-color 0.3s ease;
-        }
+    nav form,
+    nav a {
+      margin: 0;
+    }
 
-        .logout-button:hover {
-            background-color: #f0e6fa;
-        }
+    nav button {
+      background-color: white;
+      color: #57068c;
+      border: none;
+      padding: 0.5rem 1rem;
+      border-radius: 8px;
+      font-weight: bold;
+      cursor: pointer;
+      transition: background-color 0.2s ease;
+    }
 
-        h1 {
-            text-align: center;
-            color: #57068c;
-            margin-top: 2rem;
-            font-size: 2.5rem;
-        }
+    nav button:hover {
+      background-color: #eae6f7;
+    }
 
-        .scrollable-table-container {
-            max-width: 800px;
-            margin: 2rem auto;
-            padding: 1rem;
-            background-color: #ffffff;
-            border-radius: 10px;
-            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.05);
-        }
+    h1 {
+      text-align: center;
+      margin: 2rem 0 1rem;
+      color: #57068c;
+      font-size: 2.5rem;
+    }
 
-        table {
-            width: 100%;
-            border-collapse: collapse;
-        }
+    .scrollable-table-container {
+      max-width: 900px;
+      margin: auto;
+      padding: 1rem;
+      background: white;
+      border-radius: 12px;
+      box-shadow: 0 6px 16px rgba(0, 0, 0, 0.05);
+    }
 
-        th, td {
-            padding: 1rem;
-            border-bottom: 1px solid #ddd;
-            text-align: left;
-        }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 1rem;
+    }
 
-        th {
-            background-color: #f0e6fa;
-            color: #57068c;
-            font-size: 1.1rem;
-        }
+    thead {
+      background-color: #f0ebfa;
+    }
 
-        tr:hover {
-            background-color: #f8f0ff;
-        }
-    </style>
+    th,
+    td {
+      padding: 1rem;
+      text-align: left;
+      border-bottom: 1px solid #ddd;
+    }
+
+    th {
+      color: #4b2e83;
+    }
+
+    tr:hover {
+      background-color: #faf5ff;
+    }
+
+    @media screen and (max-width: 600px) {
+      .scrollable-table-container {
+        padding: 0.5rem;
+      }
+
+      h1 {
+        font-size: 1.8rem;
+      }
+    }
+  </style>
 </head>
+
 <body>
-    <nav>
-        <form class="logout" action="{% url 'users:logout' %}" method="post">
-            {% csrf_token %}
-            <button class="logout-button" aria-label="User Logout" title="User Logout">LogOut</button>
-        </form>
-    </nav>
+  <nav>
+    <form class="logout" action="{% url 'users:logout' %}" method="post">
+      {% csrf_token %}
+      <button title="Log out">Log Out</button>
+    </form>
+    <a href="{% url 'map' %}">
+      <button type="button">Go to Map</button>
+    </a>
+  </nav>
 
-    <h1>NYU Restaurant Discounts</h1>
+  <h1>NYU Restaurant Discounts</h1>
 
-    <div class="scrollable-table-container">
-        <table class="scrollable-table">
-            <thead>
-                <tr>
-                    <th>Name</th>
-                    <th>Location</th>
-                </tr>
-            </thead>
-            <tbody>
-                {% for restaurant in restaurantList %}
-                    <tr>
-                        <td>{{ restaurant.name }}</td>
-                        <td>{{ restaurant.location }}</td>
-                    </tr>
-                {% endfor %}
-            </tbody>
-        </table>
-    </div>
+  <div class="scrollable-table-container">
+    <table>
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Location</th>
+          <th>Rating</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for r in restaurants %}
+        <tr>
+          <td>{{ r.name }}</td>
+          <td>{{ r.address }}</td>
+          <td>
+            {% if r.rating %}
+              {{ r.rating|floatformat:1 }}/5
+            {% else %}
+              No Rating
+            {% endif %}
+          </td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
 </body>
+
 </html>
