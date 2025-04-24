@@ -1,6 +1,8 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, get_object_or_404, redirect
 from django.http import HttpResponse
 from rest_framework import viewsets
+
+# from django.db.models import Avg
 from .models import Users, Restaurants, Menus, Discounts, Reviews
 from .serializers import (
     UsersSerializer,
@@ -11,29 +13,25 @@ from .serializers import (
 )
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth import login
+from django.contrib.auth.decorators import login_required
 from django.utils.translation import override
 
- # 식당 리스트 예시. 실제 레스토랑을 map에서 import 해야됨.
-restaurantList = [
-    {'name': 'Pizza Place', 'location': 'Downtown'},
-    {'name': 'Sushi Spot', 'location': 'Uptown'},
-    {'name': 'Burger Joint', 'location': 'Suburbs'},
-    {'name': 'Taco Truck', 'location': 'East Side'},
-    {'name': 'Pasta Corner', 'location': 'West Side'},
-    {'name': 'Pizza Place', 'location': 'Downtown'},
-    {'name': 'Sushi Spot', 'location': 'Uptown'},
-    {'name': 'Burger Joint', 'location': 'Suburbs'},
-    {'name': 'Taco Truck', 'location': 'East Side'},
-    {'name': 'Pasta Corner', 'location': 'West Side'},
-    {'name': 'Pizza Place', 'location': 'Downtown'},
-    {'name': 'Sushi Spot', 'location': 'Uptown'},
-    {'name': 'Burger Joint', 'location': 'Suburbs'},
-    {'name': 'Taco Truck', 'location': 'East Side'},
-    {'name': 'Pasta Corner', 'location': 'West Side'},
-]
+
+# importing needed restaurant model
+from restaurant.models import Restaurants
+
 
 def home_view(request):
-    return render(request, 'restaurant/home.html', {'restaurantList': restaurantList})
+    restaurants = Restaurants.objects.all()
+    return render(
+        request,
+        "restaurant/home.html",
+        {
+            "restaurants": restaurants,
+        },
+    )
+
+
 
 class UsersViewSet(viewsets.ModelViewSet):
     queryset = Users.objects.all()

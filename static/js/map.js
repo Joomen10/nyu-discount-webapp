@@ -13,7 +13,7 @@ async function initMap() {
 
   let pin = new PinElement({
     scale: 1.25,
-    background: "#F7D32F",
+    background: "#57068C",
     glyph: "",
 
   });
@@ -27,12 +27,9 @@ async function initMap() {
     }
 
     const data = await response.json();
-    console.log("API Response Data:", data);
 
     data.forEach((rest) => {
-      console.log("Position data:", rest["longitude"], rest["latitude"], typeof rest["longitude"], typeof rest["latitude"]);
       if (rest["longitude"] && rest["latitude"]) {
-        console.log("Creating marker for:", rest.name);
         const lat = parseFloat(rest["latitude"]);
         const lng = parseFloat(rest["longitude"]);
 
@@ -43,8 +40,6 @@ async function initMap() {
           content: pin.element,
           gmpClickable: true,
         });
-
-        console.log("marker", marker);
 
         const infowindow = new google.maps.InfoWindow({
           content: `
@@ -58,7 +53,7 @@ async function initMap() {
             <p>Open Hours: ${rest.open_hours || "Not Available"}</p>
             <p>Google Place ID: ${rest.google_place_id}</p>
             <p>Discount ID: ${rest.discounts_id || "Not Available"}</p>
-          `,
+            `,
         });
 
         google.maps.event.addListener(marker, "click", () => {
