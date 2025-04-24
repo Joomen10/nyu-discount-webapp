@@ -32,6 +32,7 @@ def home_view(request):
     )
 
 
+
 class UsersViewSet(viewsets.ModelViewSet):
     queryset = Users.objects.all()
     serializer_class = UsersSerializer
