@@ -1,48 +1,54 @@
+{# restaurant/templates/restaurant/home.html #}
 {% load static %}
 <!DOCTYPE html>
 <html lang="en">
-<head>
+
+  <head>
     <link rel="stylesheet" href="{% static 'restaurant/styles.css' %}">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Restaurant</title>
-</head>
-<body>
-    <nav>
-        <form class="logout" action="{% url 'users:logout' %}" method="post">
-            {% csrf_token %}
-            <button class="logout-button" aria-label="User Logout"
-                title="User Logout">LogOut</button>
-        </form>
+  </head>
 
-        {% comment %} Added a button that directs to /map website {% endcomment %}
-        <a href="{% url 'map' %}">
-            <button type="button">Go to Map</button>
-        </a>
+  <body>
+    <nav>
+      <form class="logout" action="{% url 'users:logout' %}" method="post">
+        {% csrf_token %}
+        <button class="logout-button" title="Log out">Log Out</button>
+      </form>
+      <a href="{% url 'map' %}">
+        <button type="button">Go to Map</button>
+      </a>
     </nav>
-    
+
     <h1>Restaurant Homepage</h1>
-    
+
     <div class="scrollable-table-container">
-        <table class="scrollable-table">
-            <thead>
-                <tr>
-                    <th>Name</th>
-                    <th>Location</th>
-                    <th>Rating</th>
-                </tr>
-            </thead>
-            <tbody>
-                {% for restaurant in restaurantList %}
-                    <tr>
-                        <td>{{ restaurant.name }}</td>
-                        {% comment %} Added restaurant address and rating from real data {% endcomment %}
-                        <td>{{ restaurant.address }}</td>
-                        <td>{{ restaurant.rating }}</td>
-                    </tr>
-                {% endfor %}
-            </tbody>
-        </table>
+      <table class="scrollable-table">
+        <thead>
+          <tr>
+            <th>Name</th>
+            <th>Location</th>
+            <th>Rating</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for r in restaurants %}
+            <tr>
+              <td>{{ r.name }}</td>
+              <td>{{ r.address }}</td>
+              <td>
+                {% if r.rating %}
+                  {{ r.rating|floatformat:1 }}/5
+                {% else %}
+                  No Rating
+                {% endif %}
+              </td>
+            </tr>
+          {% endfor %}
+        </tbody>
+      </table>
     </div>
-</body>
+  </body>
+
 </html>

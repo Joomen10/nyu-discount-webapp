@@ -1,6 +1,8 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, get_object_or_404, redirect
 from django.http import HttpResponse
 from rest_framework import viewsets
+
+# from django.db.models import Avg
 from .models import Users, Restaurants, Menus, Discounts, Reviews
 from .serializers import (
     UsersSerializer,
@@ -11,23 +13,24 @@ from .serializers import (
 )
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth import login
+from django.contrib.auth.decorators import login_required
 from django.utils.translation import override
+
+
 # importing needed restaurant model
 from restaurant.models import Restaurants
 
-# Changed home_view so that it brings real data from Restaurants model
+
 def home_view(request):
-
-    qs = Restaurants.objects.all()
-    data = [
+    restaurants = Restaurants.objects.all()
+    return render(
+        request,
+        "restaurant/home.html",
         {
-            "name": r.name,
-            "address": r.address,
-            "rating": float(r.rating) if r.rating else None,
-        } for r in qs
-    ]
+            "restaurants": restaurants,
+        },
+    )
 
-    return render(request, 'restaurant/home.html', {'restaurantList': data})
 
 
 class UsersViewSet(viewsets.ModelViewSet):

@@ -18,10 +18,10 @@ router.register(r"menus", MenusViewSet)
 router.register(r"discounts", DiscountsViewSet)
 router.register(r"reviews", ReviewsViewSet)
 
-app_name = 'restaurant'
+app_name = "restaurant"
 
 urlpatterns = [
-    path("", views.home_view, name='home'),
+    path("", views.home_view, name="home"),
 ]
 
 """ 초반에 일반적인 login 페이지 만드느 방식으로 했는데 자꾸 안되길래 알아봤더니 router? 이거 때문에 "내부에서는 Django Rest Framework(DRF)의 Router 기반 URL 패턴만 노출되고 있습니다. 
