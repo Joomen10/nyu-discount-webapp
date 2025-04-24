@@ -3,6 +3,7 @@ import requests
 from django.core.management.base import BaseCommand
 from restaurant.models import Restaurants
 import pprint
+import os
 
 class Command(BaseCommand):
     help = "Import restaurants from Google Places API (NYU 중심 반경 15km 내 레스토랑 데이터 구축) using (New) Places API"
@@ -17,8 +18,8 @@ class Command(BaseCommand):
         parser.add_argument(
             '--radius',
             type=int,
-            help='검색 반경 (미터 단위, 기본 15000m = 15km)',
-            default=15000
+            help='검색 반경 (미터 단위, 기본 1000m = 1km)',
+            default=1000
         )
         parser.add_argument(
             '--type',
@@ -29,11 +30,11 @@ class Command(BaseCommand):
 
     def handle(self, *args, **options):
         # 실제 발급받은 (New) Places API 키로 교체하세요.
-        API_KEY = "AIzaSyCGyCxqGwUDZACVf-GrppfQlpgbEHv9oIo"
+        GOOGLE_MAPS_API_KEY = os.getenv("GOOGLE_MAPS_API_KEY", "")
         url = "https://places.googleapis.com/v1/places:searchNearby"
         headers = {
             "Content-Type": "application/json; charset=utf-8",
-            "X-Goog-Api-Key": API_KEY,
+            "X-Goog-Api-Key": GOOGLE_MAPS_API_KEY,
             # 반환받을 필드를 지정 (필요에 따라 수정)
             "X-Goog-FieldMask": "places(id,displayName,formattedAddress,location,rating,types,photos)"
         }
