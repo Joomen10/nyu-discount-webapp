@@ -34,6 +34,7 @@ Infrastructure: AWS EC2 (MySQL container), ZeroTier for secure development netwo
 
 ## CI/CD: GitHub Actions (lint, test, build)
 
+*/
 ## Repository Structure
 nyu-discount-webapp/
 ├─ nyudiscount/        # Project settings/urls
@@ -44,57 +45,42 @@ nyu-discount-webapp/
 ├─ manage.py
 ├─ requirements.txt
 └─ README.md
-
+/*
 
 ## Split-Domain Architecture
 To accelerate development and prevent merge conflicts, the codebase is separated into two functional domains:
-
 Restaurant Service: Handles restaurants, deals, and reviews.
-
 Branches: feature/restaurant-*
-
 Map Service: Manages the map page, markers, and zone utilities.
-
 Branches: feature/map-*
-
 This setup enables two sub-teams to work in parallel, with weekly PR reviews and quick integration.
 
-Core URLs
+## Core URLs
 Map: /map/
-
 Restaurants: /restaurants/ and /restaurants/<id>/
-
 Auth: /login/, /logout/, /signup/ (local development)
-
 Data Model (High-Level)
 Restaurant: name, location, hours, price level, tags
-
 Deal: description, discount type, start/end dates, foreign key to restaurant
-
 Review: user, rating, comment, created_at
-
 For the definitive data model, refer to restaurant/models.py.
 
-Development Workflow
+## Development Workflow
 Work on domain-specific branches: feature/map-* or feature/restaurant-*.
-
 Submit small, focused pull requests with screenshots or short clips for UI changes.
-
 Conduct weekly PR reviews to ensure shared code quality across domains.
-
 Keep views thin; move shared logic into helpers or services.
-
 Run tests locally using python manage.py test.
 
-CI/CD
+## CI/CD
 GitHub Actions automatically runs linting and tests on every push and pull request.
 
-Notes
-NetID/SSO: The app supports NetID-gated access in production. Use local auth during development.
+## Notes
+### NetID/SSO: The app supports NetID-gated access in production. Use local auth during development.
 
-ZeroTier: This tool is used by the development team for secure networking of local instances and is optional for most contributors.
+### ZeroTier: This tool is used by the development team for secure networking of local instances and is optional for most contributors.
 
-Google APIs: You must provide valid API keys for both Maps and Places to render the map and fetch restaurant details.
+### Google APIs: You must provide valid API keys for both Maps and Places to render the map and fetch restaurant details.
 
 License
 All rights reserved.
