@@ -73,14 +73,14 @@ Keep views thin; move shared logic into helpers or services.
 Run tests locally using python manage.py test.  
 
 ## CI/CD
-GitHub Actions automatically runs linting and tests on every push and pull request.
+GitHub Actions automatically runs linting and tests on every push and pull request.  
 
 ## Notes
-### NetID/SSO: The app supports NetID-gated access in production. Use local auth during development.  
+NetID/SSO: The app supports NetID-gated access in production. Use local auth during development.    
 
-### ZeroTier: This tool is used by the development team for secure networking of local instances and is optional for most contributors.  
+ZeroTier: This tool is used by the development team for secure networking of local instances and is optional for most contributors.    
 
-### Google APIs: You must provide valid API keys for both Maps and Places to render the map and fetch restaurant details.
+Google APIs: You must provide valid API keys for both Maps and Places to render the map and fetch restaurant details.  
 
 License
 All rights reserved.
